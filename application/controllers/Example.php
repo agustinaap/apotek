@@ -785,7 +785,7 @@ class Example extends CI_Controller
 	function remove_data($id, $id_name, $table_name, $flash_name, $view_name){
 		$where = array($id_name => $id);
 		$this->apotek_data->delete_data($where, $table_name);
-		$this->session->set_flashdata($flash_name, 'Data berhasil dihapus');
+		$this->session->set_flashdata($flash_name, 'Data berhasil dihapus!');
 		redirect('example/'.$view_name);
 	}
 
