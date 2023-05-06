@@ -399,7 +399,7 @@ class Example extends CI_Controller
 				'kata_sandi' => $password,
 				);
 			
-			$status_add = $this->apotek_data->insert_data_user($nama_pengguna,'tabel_pengguna');
+			$status_add = $this->apotek_data->check_data_if_available($nama_pengguna,'tabel_pengguna','nama_pengguna');
 			
 			if ($status_add == 200) {
 				$this->apotek_data->insert_data($data,'tabel_pengguna');
@@ -424,46 +424,23 @@ class Example extends CI_Controller
 	}
 
 	function add_jenis_obat(){
-		$nama_pengguna = $this->input->post('nama_pengguna');
-		$email = $this->input->post('email');
-		$level = $this->input->post('level');
-		$password = $this->input->post('password');
-		$password_confirmation = $this->input->post('password_confirmation');
+		$jenis = $this->input->post('jenis');
 
-		if ($password === $password_confirmation) {
-			$data = array(
-				'nama_pengguna' => $nama_pengguna,
-				'email' => $email,
-				'level_pengguna' => $level,
-				'kata_sandi' => $password,
-				);
+		$data = array('nama' => $jenis);
 			
-			$status_add = $this->apotek_data->insert_data_user($nama_pengguna,'tabel_pengguna');
-			
-			if ($status_add == 200) {
-				$this->apotek_data->insert_data($data,'tabel_pengguna');
-				$this->session->set_flashdata('user_added', 'Pengguna berhasil ditambahkan');
-				redirect('example/table_user');
-			}
-			else if ($status_add == 500) {
-				$this->session->set_flashdata('password_not_match', "Username yang anda masukkan sudah terdaftar, mohon coba username yang lain");
-				$this->session->set_flashdata('add_username', $nama_pengguna);
-				$this->session->set_flashdata('add_email', $email);
-				$this->session->set_flashdata('add_level', $level);
-				redirect('example/form_user/');
-			}
+		$status_add = $this->apotek_data->check_data_if_available($jenis,'tabel_jenis_obat','nama');
+		
+		if ($status_add == 200) {
+			$this->apotek_data->insert_data($data,'tabel_jenis_obat');
+			$this->session->set_flashdata('success', 'Jenis obat berhasil ditambahkan');
+			redirect('example/table_jenis_obat');
 		}
-		else {
-			$this->session->set_flashdata('password_not_match', "Password konfirmasi tidak sesuai, mohon coba lagi");
-			$this->session->set_flashdata('add_username', $nama_pengguna);
-			$this->session->set_flashdata('add_email', $email);
-			$this->session->set_flashdata('add_level', $level);
-			redirect('example/form_user/');
-		}	
+		else if ($status_add == 500) {
+			$this->session->set_flashdata('failed_save_data', "Jenis obat yang anda masukkan sudah terdaftar, silakan masukkan inputan yang lain");
+			$this->session->set_flashdata('add_jenis', $jenis);
+			redirect('example/form_jenis_obat/');
+		}
 	}
-
-	
-
 
 	function add_invoice(){
 		 
@@ -665,6 +642,16 @@ class Example extends CI_Controller
 		$this->template->render();
 	}
 
+	function edit_form_jenis_obat($id) {
+		$where = array('id' => $id);
+		$data['tabel_jenis_obat'] = $this->apotek_data->edit_data($where,'tabel_jenis_obat')->result();
+		$this->template->write('title', 'Ubah Jenis Obat', TRUE);
+		$this->template->write('header', 'Sistem Informasi Apotek');
+		$this->template->write_view('content', 'tes/edit_form_jenis_obat', $data, true);
+
+		$this->template->render();
+	}
+
 	function edit_form_unit($id_unit) {
 		$where = array('id_unit' => $id_unit);
 		$data['table_unit'] = $this->apotek_data->edit_data($where,'table_unit')->result();
@@ -724,7 +711,7 @@ class Example extends CI_Controller
 		
 				$this->apotek_data->update_data($where,$data,'tabel_pengguna');
 		
-				$this->session->set_flashdata('user_added', 'Data pengguna berhasil diperbarui');
+				$this->session->set_flashdata('user_added', 'Data berhasil diperbarui');
 				redirect('example/table_user');
 			}
 			else {
@@ -736,6 +723,25 @@ class Example extends CI_Controller
 			$this->session->set_flashdata('password_not_match', "Password lama tidak sesuai, mohon coba lagi");
 			redirect('example/edit_form_user/'.$id_pengguna);
 		}
+	}
+	
+	function update_jenis_obat(){
+		$id = $this->input->post('id');
+		$jenis = $this->input->post('jenis');
+
+		$data = array(
+			'id' => $id,
+			'nama' => $jenis
+		);
+
+		$where = array(
+			'id' => $id
+		);
+
+		$this->apotek_data->update_data($where,$data,'tabel_jenis_obat');
+
+		$this->session->set_flashdata('success', 'Data berhasil diperbarui');
+		redirect('example/table_jenis_obat');
 	}
 
 	function update_unit(){
@@ -776,11 +782,11 @@ class Example extends CI_Controller
 		redirect('example/table_sup');
 	}
 
-	function remove_user($id_pengguna){
-		$where = array('id_pengguna' => $id_pengguna);
-		$this->apotek_data->delete_data($where,'tabel_pengguna');
-		$this->session->set_flashdata('user_added', 'Pengguna berhasil dihapus');
-		redirect('example/table_user');
+	function remove_data($id, $id_name, $table_name, $flash_name, $view_name){
+		$where = array($id_name => $id);
+		$this->apotek_data->delete_data($where, $table_name);
+		$this->session->set_flashdata($flash_name, 'Data berhasil dihapus');
+		redirect('example/'.$view_name);
 	}
 
 	function remove_unit($id_unit){

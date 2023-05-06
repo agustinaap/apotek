@@ -66,7 +66,7 @@
 function myFunction(data) {
   let text = "Apakah anda yakin ingin menghapus?";
   if (confirm(text) == true) {
-    window.location.href = "<?php echo base_url('example/remove_user/') ?>"+data;
+    window.location.href = "<?php echo base_url('example/remove_data/') ?>"+data+'/id_pengguna/tabel_pengguna/user_added/table_user';
   } else {
     
   }

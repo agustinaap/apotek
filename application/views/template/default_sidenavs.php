@@ -59,10 +59,10 @@
 
 					<li><a><i class="fa fa-list-alt"></i> Jenis <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
-							<li><a href="<?php echo base_url('example/form_user') ?>">Tambah Jenis Obat</a></li>
+							<li><a href="<?php echo base_url('example/form_jenis_obat') ?>">Tambah Jenis Obat</a></li>
                     		<li><a href="<?php echo base_url('example/table_jenis_obat') ?>">Lihat Jenis Obat</a></li>
-							<li><a href="<?php echo base_url('example/form_user') ?>">Tambah Jenis BHP</a></li>
-                    		<li><a href="<?php echo base_url('example/table_user') ?>">Lihat Jenis BHP</a></li>
+							<li><a href="<?php echo base_url('example/form_jenis_bhp') ?>">Tambah Jenis BHP</a></li>
+                    		<li><a href="<?php echo base_url('example/table_jenis_bhp') ?>">Lihat Jenis BHP</a></li>
 						</ul>
 					</li>
 

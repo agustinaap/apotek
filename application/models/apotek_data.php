@@ -168,8 +168,8 @@ class Apotek_data extends CI_Model
         $this->db->insert($table,$data);
     }
 
-    function insert_data_user($data,$table){
-        $hasil=$this->db->query("SELECT * FROM ".$table." WHERE nama_pengguna='$data'");
+    function check_data_if_available($data,$table,$column){
+        $hasil=$this->db->query("SELECT * FROM ".$table." WHERE ".$column."='$data'");
         $status = 0;
         if($hasil->num_rows()>0){
             $status = 500;
@@ -188,9 +188,9 @@ class Apotek_data extends CI_Model
         $this->db->update($table,$data);
     }  
 
-    function delete_data($where,$table){
-    $this->db->where($where);
-    $this->db->delete($table);
+    function delete_data($where,$table){  
+        $this->db->where($where);
+        $this->db->delete($table);
     }
 
     function show_data($where, $table){      

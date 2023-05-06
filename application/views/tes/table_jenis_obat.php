@@ -13,16 +13,16 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="x_content">
-				<?php if($this->session->flashdata('user_added')): ?>
+				<?php if($this->session->flashdata('success')): ?>
                   <button id="melinda" style="display: none;" class="btn btn-default source" onclick="new PNotify({
                                   title: 'Berhasil',
-                                  text: '<?php echo $this->session->flashdata('user_added'); ?>',
+                                  text: '<?php echo $this->session->flashdata('success'); ?>',
                                   type: 'success',
                                   hide: false,
                                   styling: 'bootstrap3'
                               });">Success</button>
                  	</div>
-                 	<?php $this->session->set_flashdata('user_added', null); ?>
+                 	<?php $this->session->set_flashdata('success', null); ?>
 				<?php endif; ?>
 
 				<a href="<?php echo base_url('example/form_jenis_obat') ?>"><button type="button" class="btn btn-success" style="margin-bottom: 13px"><span class="fa fa-plus"></span> Tambah Jenis </button></a>
@@ -44,7 +44,7 @@
 							<th scope="row"><?= $sn ?></th>
 							<td><?php echo $s->nama ?></td>
 							<td style=" text-align: center;">
-								<?php echo anchor('example/edit_form_user/'.$s->id, '<button class="btn btn-info btn-xs" type="button"><span class="fa fa-pencil"></span></button>'); ?>
+								<?php echo anchor('example/edit_form_jenis_obat/'.$s->id, '<button class="btn btn-info btn-xs" type="button"><span class="fa fa-pencil"></span></button>'); ?>
 								<button class="btn btn-danger btn-xs" onclick="myFunction(<?php echo $s->id ?>)" type="button"><span class="fa fa-trash"></span></button>
 					         </td>
 						</tr>
@@ -62,7 +62,7 @@
 function myFunction(data) {
   let text = "Apakah anda yakin ingin menghapus?";
   if (confirm(text) == true) {
-    // window.location.href = "<?php echo base_url('example/remove_user/') ?>"+data;
+    window.location.href = "<?php echo base_url('example/remove_data/') ?>"+data+'/id/tabel_jenis_obat/success/table_jenis_obat';
   } else {
     
   }
