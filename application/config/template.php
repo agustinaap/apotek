@@ -106,12 +106,12 @@ $template['bootstrap']['parse_template'] = FALSE;
 
 $template['default']['template'] = 'tes/mypage.php';
 $template['default']['regions'] = array(
-   'title' => array('content' => array('Rumah Sakit Hewan Prof. Soeparwi')),
+   'title' => array('content' => array('Klinik SWA')),
    'header',
    'content',
    'navs',
    'footer' => array(
-        'content' => array('<p>FKH UGM &copy; 2018</p>'),
+        'content' => array('<p>&copy; 2023</p>'),
     ),
 );
 
@@ -121,13 +121,13 @@ $template['default']['parse_template'] = FALSE;
 
 $template['body']['template'] = 'template/body.php';
 $template['body']['regions'] = array(
-   'title' => array('content' => array('Rumah Sakit Hewan Prof. Soeparwi')),
+   'title' => array('content' => array('Klinik SWA')),
    'header',
    'navs',
    'sidenavs',
    'content',
    'footer' => array(
-        'content' => array('FKH UGM &copy; 2018'),
+        'content' => array('&copy; 2023'),
     ),
 );
 

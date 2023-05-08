@@ -24,7 +24,7 @@
 				<ul class="nav side-menu">
 
 					<li><a href="<?php echo base_url('') ?>"><i class="fa fa-home"></i> Beranda </a></li>
-					<li><a><i class="fa fa-medkit"></i> Obat <span class="fa fa-chevron-down"></span></a>
+					<!-- <li><a><i class="fa fa-medkit"></i> Obat <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 							<li><a href="<?php echo base_url('example/form_med') ?>">Tambah Obat</a></li>
 							<li><a href="<?php echo base_url('example/table_med') ?>">Lihat Obat</a></li>
@@ -48,7 +48,7 @@
 							<li><a href="<?php echo base_url('example/form_sup') ?>">Tambah Pemasok</a></li>
                     		<li><a href="<?php echo base_url('example/table_sup') ?>">Lihat Pemasok</a></li>
 						</ul>
-					</li>
+					</li> -->
 
 					<li><a><i class="fa fa-users"></i> User <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
@@ -67,7 +67,7 @@
 					</li>
 
 				
-					<li><a><i class="fa fa-edit"></i> Penjualan <span class="fa fa-chevron-down"></span></a>
+					<!-- <li><a><i class="fa fa-edit"></i> Penjualan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     	<li><a href="<?php echo base_url('example/form_invoice') ?>">Tambah Penjualan</a></li>
                     	<li><a href="<?php echo base_url('example/table_invoice') ?>">Lihat Penjualan</a></li>
@@ -87,7 +87,7 @@
 					</li>
 
 
-					<li><a href="<?php echo base_url('example/report') ?>"><i class="fa fa-bar-chart"></i> Laporan </a></li>
+					<li><a href="<?php echo base_url('example/report') ?>"><i class="fa fa-bar-chart"></i> Laporan </a></li> -->
 
 				</ul>
 			</div>

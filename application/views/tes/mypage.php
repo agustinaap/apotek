@@ -1,6 +1,6 @@
 <div>
 
-<?php if ($nullstock > 0): ?>
+<!-- <?php if ($nullstock > 0): ?>
                   <button id="melinda" style="display: none;" class="btn btn-default source" onclick="new PNotify({
                                   title: 'Peringatan',
                                   text: 'Obat sudah habis...',
@@ -20,14 +20,21 @@
                                   styling: 'bootstrap3'
                               });">Error</button>
                   
-        <?php endif; ?>
+        <?php endif; ?> -->
 
 <!-- top tiles -->
           <div class="row tile_count" style="text-align: center;">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-medkit"></i> Total Jenis Obat</span>
+              <div class="count"><?php echo $stockjenisobat ?></div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-medkit"></i> Total Jenis BHP</span>
+              <div class="count"><?php echo $stockjenisobat ?></div>
+            </div>
+            <!-- <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-medkit"></i> Total Obat</span>
               <div class="count"><?php echo $stockobat ?></div>
-              
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-hospital-o"></i> Total Kategori</span>
@@ -48,7 +55,7 @@
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-edit"></i> Total Pembelian</span>
               <div class="count"><?php echo ($totpur/1000) ?>k</div>
-            </div>
+            </div> -->
 
           </div>
 
@@ -57,9 +64,21 @@
 
           <div class="row top_tiles">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                  <a href="<?php echo base_url('example/form_jenis_obat') ?>">
+                  <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-list-alt green"></i>
+                    </div>
+                    <div class="count">...</div>
+                    <h3>Jenis Obat</h3>
+                    <p>Menambahkan jenis obat baru</p>
+                  </div>
+                  </a>
+                </div>
+
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                   <a href="<?php echo base_url('example/form_med') ?>">
                   <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-medkit green"></i>
+                    <div class="icon"><i class="fa fa-list-alt green"></i>
                     </div>
                     <div class="count">...</div>
                     <h3>Obat</h3>
@@ -68,7 +87,7 @@
                   </a>
                 </div>
 
-                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <!-- <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                   <a href="<?php echo base_url('example/form_cat') ?>">
                   <div class="tile-stats">
                     <div class="icon"><i class="fa fa-hospital-o green"></i>
@@ -156,7 +175,7 @@
                   </div>
                 </div>
               </a>
-            </div>
+            </div> -->
 
   <div>
     

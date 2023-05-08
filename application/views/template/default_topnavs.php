@@ -19,7 +19,7 @@
 				-->
 				</li>
 
-				<li role="presentation" class="dropdown">
+				<!-- <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-bell-o" style="font-size: 18px"></i>
                     <span class="badge bg-red" ><?php $nulltol = $nullex + $nullstock ; if ($nulltol > 0) echo $nulltol ?></span>
@@ -53,7 +53,7 @@
                    
                     
                   </ul>
-                </li>
+                </li> -->
 			</ul>
 		</nav>
 	</div>
