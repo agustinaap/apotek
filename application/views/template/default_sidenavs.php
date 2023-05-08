@@ -3,12 +3,12 @@
  		<div class="navbar nav_title" style="border: 0;">
  			<!-- logo info -->
  			<div class="logo_pic">
- 				<a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/images/ugm.png') ?>" alt="..." class="img-circle logo_img"></a>
+ 				<a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/images/swa.png') ?>" alt="..." class="img-circle logo_img"></a>
  			</div>
 			
 		</div>
 		<div class="profile">
-		<a href="<?php echo base_url(); ?>" class="site_title"><span style="font-size: 20px;"><?php echo 'Rumah Sakit Hewan Prof. Soeparwi' ?></span></a>
+		<a href="<?php echo base_url(); ?>" class="site_title"><span style="font-size: 20px;"><?php echo 'Klinik Pratama SWA' ?></span></a>
 		</div>
 
 		

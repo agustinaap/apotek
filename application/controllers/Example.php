@@ -230,6 +230,14 @@ class Example extends CI_Controller
 		$this->template->render();
 	}
 
+	function form_jenis_bhp() {
+		$this->template->write('title', 'Tambah Jenis BHP', TRUE);
+		$this->template->write('header', 'Sistem Informasi Apotek');
+		$this->template->write_view('content', 'tes/form_jenis_bhp', '', true);
+
+		$this->template->render();
+	}
+
 	function form_invoice() {
 		$data['table_med'] = $this->apotek_data->medicine()->result();
 		$data['get_cat'] = $this->apotek_data->get_category();
@@ -439,6 +447,25 @@ class Example extends CI_Controller
 			$this->session->set_flashdata('failed_save_data', "Jenis obat yang anda masukkan sudah terdaftar, silakan masukkan inputan yang lain");
 			$this->session->set_flashdata('add_jenis', $jenis);
 			redirect('example/form_jenis_obat/');
+		}
+	}
+
+	function add_jenis_bhp(){
+		$jenis = $this->input->post('jenis');
+
+		$data = array('nama' => $jenis);
+			
+		$status_add = $this->apotek_data->check_data_if_available($jenis,'tabel_jenis_bhp','nama');
+		
+		if ($status_add == 200) {
+			$this->apotek_data->insert_data($data,'tabel_jenis_bhp');
+			$this->session->set_flashdata('success', 'Jenis BHP berhasil ditambahkan');
+			redirect('example/table_jenis_bhp');
+		}
+		else if ($status_add == 500) {
+			$this->session->set_flashdata('failed_save_data', "Jenis BHP yang anda masukkan sudah terdaftar, silakan masukkan inputan yang lain");
+			$this->session->set_flashdata('add_jenis', $jenis);
+			redirect('example/form_jenis_bhp/');
 		}
 	}
 
@@ -652,6 +679,16 @@ class Example extends CI_Controller
 		$this->template->render();
 	}
 
+	function edit_form_jenis_bhp($id) {
+		$where = array('id' => $id);
+		$data['tabel_jenis_bhp'] = $this->apotek_data->edit_data($where,'tabel_jenis_bhp')->result();
+		$this->template->write('title', 'Ubah Jenis BHP', TRUE);
+		$this->template->write('header', 'Sistem Informasi Apotek');
+		$this->template->write_view('content', 'tes/edit_form_jenis_bhp', $data, true);
+
+		$this->template->render();
+	}
+
 	function edit_form_unit($id_unit) {
 		$where = array('id_unit' => $id_unit);
 		$data['table_unit'] = $this->apotek_data->edit_data($where,'table_unit')->result();
@@ -742,6 +779,25 @@ class Example extends CI_Controller
 
 		$this->session->set_flashdata('success', 'Data berhasil diperbarui');
 		redirect('example/table_jenis_obat');
+	}
+	
+	function update_jenis_bhp(){
+		$id = $this->input->post('id');
+		$jenis = $this->input->post('jenis');
+
+		$data = array(
+			'id' => $id,
+			'nama' => $jenis
+		);
+
+		$where = array(
+			'id' => $id
+		);
+
+		$this->apotek_data->update_data($where,$data,'tabel_jenis_bhp');
+
+		$this->session->set_flashdata('success', 'Data berhasil diperbarui');
+		redirect('example/table_jenis_bhp');
 	}
 
 	function update_unit(){

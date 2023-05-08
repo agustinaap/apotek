@@ -2,7 +2,7 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Ubah Jenis Obat</h2>
+        <h2>Ubah Jenis BHP</h2>
         <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -26,8 +26,8 @@
                  	
 				<?php endif; ?>
 
-        <?php foreach($tabel_jenis_obat as $s){ ?>
-        <form action="<?php echo base_url(). 'example/update_jenis_obat'; ?>" method="post" class="form-horizontal form-label-left" novalidate >
+        <?php foreach($tabel_jenis_bhp as $s){ ?>
+        <form action="<?php echo base_url(). 'example/update_jenis_bhp'; ?>" method="post" class="form-horizontal form-label-left" novalidate >
 
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">Jenis</label>
@@ -40,7 +40,7 @@
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-md-6 col-md-offset-3">
-              <a href="<?php echo base_url('example/table_jenis_obat') ?>"><button type="button" class="btn btn-danger">Batal</button></a>
+              <a href="<?php echo base_url('example/table_jenis_bhp') ?>"><button type="button" class="btn btn-danger">Batal</button></a>
               <button id="send" type="submit" class="btn btn-success">Simpan</button>
             </div>
           </div>
