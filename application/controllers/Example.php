@@ -24,6 +24,7 @@ class Example extends CI_Controller
 
 	function index() {
 		$data['stockjenisobat'] = $this->apotek_data->count_jenis_obat();
+		$data['stockjenisbhp'] = $this->apotek_data->count_jenis_bhp();
 		$data['stockobat'] = $this->apotek_data->count_med();
 		$data['stockkat'] = $this->apotek_data->count_cat();
 		$data['sup'] = $this->apotek_data->count_sup();

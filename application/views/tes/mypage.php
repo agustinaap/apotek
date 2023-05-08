@@ -30,7 +30,7 @@
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-medkit"></i> Total Jenis BHP</span>
-              <div class="count"><?php echo $stockjenisobat ?></div>
+              <div class="count"><?php echo $stockjenisbhp ?></div>
             </div>
             <!-- <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-medkit"></i> Total Obat</span>
@@ -76,13 +76,13 @@
                 </div>
 
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                  <a href="<?php echo base_url('example/form_med') ?>">
+                  <a href="<?php echo base_url('example/form_jenis_bhp') ?>">
                   <div class="tile-stats">
                     <div class="icon"><i class="fa fa-list-alt green"></i>
                     </div>
                     <div class="count">...</div>
-                    <h3>Obat</h3>
-                    <p>Menambahkan obat baru</p>
+                    <h3>Jenis BHP</h3>
+                    <p>Menambahkan jenis bhp baru</p>
                   </div>
                   </a>
                 </div>

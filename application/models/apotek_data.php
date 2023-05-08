@@ -440,6 +440,12 @@ class Apotek_data extends CI_Model
         return $sup;    
     }
 
+    function count_jenis_bhp(){       
+      $cp =  $this->db->query('SELECT * FROM tabel_jenis_bhp'); 
+        $sup = $cp->num_rows();
+        return $sup;    
+    }
+
     function count_unit(){       
       $cu =  $this->db->query('SELECT * FROM table_cat'); 
         $cunit = $cu->num_rows();
