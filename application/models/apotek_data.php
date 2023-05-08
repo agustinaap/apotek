@@ -41,6 +41,12 @@ class Apotek_data extends CI_Model
         return $this->db->get('tabel_jenis_bhp');
     }
 
+    function obat()
+    {
+        return $this->db->query("SELECT m.id_obat, m.nama_obat, m.nama_merk, c.nama, m.bpjs FROM tabel_obat m 
+        INNER JOIN tabel_jenis_obat AS c ON m.jenis_obat = c.id;");
+    }
+
     function unit()
     {
         return $this->db->get('table_unit');
@@ -138,6 +144,13 @@ class Apotek_data extends CI_Model
         }
         asort($data);
         return $data;
+    }
+
+    function get_obat()
+    {
+        return $this->db->query("SELECT m.id_obat, m.nama_obat, m.nama_merk, c.nama, p.stok, p.harga_jual,
+         p.tgl_kadaluwarsa, m.bpjs FROM tabel_obat m INNER JOIN tabel_jenis_obat AS c ON m.jenis_obat = c.id 
+         INNER JOIN tabel_pembelian p ON p.id_obat = m.id_obat");
     }
 
       function get_product($nama_obat)

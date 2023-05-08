@@ -24,7 +24,16 @@
 				<ul class="nav side-menu">
 
 					<li><a href="<?php echo base_url('') ?>"><i class="fa fa-home"></i> Beranda </a></li>
-					<!-- <li><a><i class="fa fa-medkit"></i> Obat <span class="fa fa-chevron-down"></span></a>
+					<li><a><i class="fa fa-medkit"></i> Obat <span class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a href="<?php echo base_url('example/form_obat') ?>">Tambah Obat</a></li>
+							<li><a href="<?php echo base_url('example/table_obat') ?>">Lihat Obat</a></li>
+							<!-- <li><a href="<?php echo base_url('example/table_exp') ?>">Obat Kedaluwarsa</a></li>
+							<li><a href="<?php echo base_url('example/table_stock') ?>">Obat Habis</a></li> -->
+							
+						</ul>
+					</li>
+					<!-- <li><a><i class="fa fa-stethoscope"></i> Obat <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 							<li><a href="<?php echo base_url('example/form_med') ?>">Tambah Obat</a></li>
 							<li><a href="<?php echo base_url('example/table_med') ?>">Lihat Obat</a></li>
@@ -32,8 +41,8 @@
 							<li><a href="<?php echo base_url('example/table_stock') ?>">Obat Habis</a></li>
 							
 						</ul>
-					</li>
-					<li><a><i class="fa fa-hospital-o"></i> Kategori & Unit <span class="fa fa-chevron-down"></span></a>
+					</li> -->
+					<!-- <li><a><i class="fa fa-hospital-o"></i> Kategori & Unit <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 							<li><a href="<?php echo base_url('example/form_cat') ?>">Tambah Kategori</a></li>
 							<li><a href="<?php echo base_url('example/table_cat') ?>">Lihat Kategori</a></li>
@@ -57,7 +66,7 @@
 						</ul>
 					</li>
 
-					<li><a><i class="fa fa-list-alt"></i> Jenis <span class="fa fa-chevron-down"></span></a>
+					<li><a><i class="fa fa-list-alt"></i> Jenis Obat / BHP<span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 							<li><a href="<?php echo base_url('example/form_jenis_obat') ?>">Tambah Jenis Obat</a></li>
                     		<li><a href="<?php echo base_url('example/table_jenis_obat') ?>">Lihat Jenis Obat</a></li>

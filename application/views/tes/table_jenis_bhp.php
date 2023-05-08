@@ -25,6 +25,18 @@
                  	<?php $this->session->set_flashdata('success', null); ?>
 				<?php endif; ?>
 
+				<?php if($this->session->flashdata('failed')): ?>
+                  <button id="melinda" style="display: none;" class="btn btn-default source" onclick="new PNotify({
+                                  title: 'Gagal',
+                                  text: '<?php echo $this->session->flashdata('failed'); ?>',
+                                  type: 'error',
+                                  hide: false,
+                                  styling: 'bootstrap3'
+                              });">Success</button>
+                 	</div>
+                 	<?php $this->session->set_flashdata('failed', null); ?>
+				<?php endif; ?>
+
 				<a href="<?php echo base_url('example/form_jenis_bhp') ?>"><button type="button" class="btn btn-success" style="margin-bottom: 13px"><span class="fa fa-plus"></span> Tambah Jenis </button></a>
 				
 				<table id="datatable-buttons" class="table table-striped table-bordered">
@@ -62,7 +74,7 @@
 function myFunction(data) {
   let text = "Apakah anda yakin ingin menghapus?";
   if (confirm(text) == true) {
-    window.location.href = "<?php echo base_url('example/remove_data/') ?>"+data+'/id/tabel_jenis_bhp/success/table_jenis_bhp';
+    window.location.href = "<?php echo base_url('example/remove_data/') ?>"+data+'/id/tabel_jenis_bhp/table_jenis_bhp';
   } else {
     
   }

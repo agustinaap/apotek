@@ -25,6 +25,30 @@
                  	<?php $this->session->set_flashdata('user_added', null); ?>
 				<?php endif; ?>
 
+				<?php if($this->session->flashdata('success')): ?>
+                  <button id="melinda" style="display: none;" class="btn btn-default source" onclick="new PNotify({
+                                  title: 'Berhasil',
+                                  text: '<?php echo $this->session->flashdata('success'); ?>',
+                                  type: 'success',
+                                  hide: false,
+                                  styling: 'bootstrap3'
+                              });">Success</button>
+                 	</div>
+                 	<?php $this->session->set_flashdata('success', null); ?>
+				<?php endif; ?>
+
+				<?php if($this->session->flashdata('failed')): ?>
+                  <button id="melinda" style="display: none;" class="btn btn-default source" onclick="new PNotify({
+                                  title: 'Gagal',
+                                  text: '<?php echo $this->session->flashdata('failed'); ?>',
+                                  type: 'error',
+                                  hide: false,
+                                  styling: 'bootstrap3'
+                              });">Success</button>
+                 	</div>
+                 	<?php $this->session->set_flashdata('failed', null); ?>
+				<?php endif; ?>
+
 				<a href="<?php echo base_url('example/form_user') ?>"><button type="button" class="btn btn-success" style="margin-bottom: 13px"><span class="fa fa-plus"></span> Tambah Pengguna </button></a>
 				
 				<table id="datatable-buttons" class="table table-striped table-bordered">
@@ -66,7 +90,7 @@
 function myFunction(data) {
   let text = "Apakah anda yakin ingin menghapus?";
   if (confirm(text) == true) {
-    window.location.href = "<?php echo base_url('example/remove_data/') ?>"+data+'/id_pengguna/tabel_pengguna/user_added/table_user';
+    window.location.href = "<?php echo base_url('example/remove_data/') ?>"+data+'/id_pengguna/tabel_pengguna/table_user';
   } else {
     
   }

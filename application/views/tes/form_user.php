@@ -52,11 +52,35 @@
               <input type="text" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $email ?>">
             </div>
           </div>
-         
+
           <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" >Level</label>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="level">Level</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" id="level" name="level" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $level ?>">
+              <select  name="level" id="level" class="select2_single form-control" tabindex="-1" required="required">
+              <option selected="true" value="" disabled ></option>
+              <?php 
+                if ($level == '1') {
+                  ?><option value="1" selected>1</option><?php
+                  ?><option value="2">2</option><?php
+                  ?><option value="3">3</option><?php
+                }
+                else if ($level == '2') {
+                  ?><option value="1">1</option><?php
+                  ?><option value="2" selected>2</option><?php
+                  ?><option value="3">3</option><?php
+                }
+                else if ($level == '3') {
+                  ?><option value="1">1</option><?php
+                  ?><option value="2">2</option><?php
+                  ?><option value="3" selected>3</option><?php
+                }
+                else {
+                  ?><option value="1">1</option><?php
+                  ?><option value="2">2</option><?php
+                  ?><option value="3">3</option><?php
+                }
+              ?>
+            </select>
             </div>
           </div>
          

@@ -112,6 +112,16 @@ class Example extends CI_Controller
 		$this->template->render();
 	}
 
+	function table_obat() {
+		$data['table_obat'] = $this->apotek_data->get_obat()->result();
+		$data['list_obat'] = $this->apotek_data->obat()->result();
+		$this->template->write('title', 'Lihat Obat', TRUE);
+		$this->template->write('header', 'Sistem Informasi Apotek');
+		$this->template->write_view('content', 'tes/table_obat', $data, true);
+
+		$this->template->render();
+	}
+
 	function table_unit() {
 		
 		$data['table_unit'] = $this->apotek_data->unit()->result();
@@ -236,6 +246,15 @@ class Example extends CI_Controller
 		$this->template->write('title', 'Tambah Jenis BHP', TRUE);
 		$this->template->write('header', 'Sistem Informasi Apotek');
 		$this->template->write_view('content', 'tes/form_jenis_bhp', '', true);
+
+		$this->template->render();
+	}
+
+	function form_obat() {
+		$data['table_jenis_obat'] = $this->apotek_data->jenis_obat()->result();
+		$this->template->write('title', 'Tambah Obat', TRUE);
+		$this->template->write('header', 'Sistem Informasi Apotek');
+		$this->template->write_view('content', 'tes/form_obat', $data, true);
 
 		$this->template->render();
 	}
@@ -471,6 +490,39 @@ class Example extends CI_Controller
 		}
 	}
 
+	function add_obat(){
+		$id_obat = $this->input->post('id_obat');
+		$nama_obat = $this->input->post('nama_obat');
+		$merk = $this->input->post('merk');
+		$jenis = $this->input->post('jenis');
+		$bpjs = $this->input->post('bpjs');
+
+		$data = array(
+			'id_obat' => $id_obat,
+			'nama_obat' => $nama_obat,
+			'nama_merk' => $merk,
+			'jenis_obat' => $jenis,
+			'bpjs' => $bpjs
+		);
+			
+		$status_add = $this->apotek_data->check_data_if_available($id_obat,'tabel_obat','id_obat');
+		
+		if ($status_add == 200) {
+			$this->apotek_data->insert_data($data,'tabel_obat');
+			$this->session->set_flashdata('success', 'Obat berhasil ditambahkan');
+			redirect('example/table_obat');
+		}
+		else if ($status_add == 500) {
+			$this->session->set_flashdata('failed_save_data', "Obat yang anda masukkan sudah terdaftar, silakan masukkan inputan yang lain");
+			$this->session->set_flashdata('add_id_obat', $id_obat);
+			$this->session->set_flashdata('add_nama_obat', $nama_obat);
+			$this->session->set_flashdata('add_merk_obat', $merk);
+			$this->session->set_flashdata('add_jenis', $jenis);
+			$this->session->set_flashdata('add_bpjs', $bpjs);
+			redirect('example/form_obat/');
+		}
+	}
+
 	function add_invoice(){
 		 
 			$nama_pembeli = $this->input->post('nama_pembeli');
@@ -691,6 +743,17 @@ class Example extends CI_Controller
 		$this->template->render();
 	}
 
+	function edit_form_obat($id) {
+		$where = array('id_obat' => $id);
+		$data['tabel_obat'] = $this->apotek_data->edit_data($where,'tabel_obat')->result();
+		$data['table_jenis_obat'] = $this->apotek_data->jenis_obat()->result();
+		$this->template->write('title', 'Ubah Obat', TRUE);
+		$this->template->write('header', 'Sistem Informasi Apotek');
+		$this->template->write_view('content', 'tes/edit_form_obat', $data, true);
+
+		$this->template->render();
+	}
+
 	function edit_form_unit($id_unit) {
 		$where = array('id_unit' => $id_unit);
 		$data['table_unit'] = $this->apotek_data->edit_data($where,'table_unit')->result();
@@ -840,11 +903,36 @@ class Example extends CI_Controller
 		redirect('example/table_sup');
 	}
 
-	function remove_data($id, $id_name, $table_name, $flash_name, $view_name){
+	function remove_jenis($id, $id_name, $table_name, $view_name){
+		if ($table_name == 'tabel_jenis_obat') {
+			
+		}
+
 		$where = array($id_name => $id);
 		$this->apotek_data->delete_data($where, $table_name);
-		$this->session->set_flashdata($flash_name, 'Data berhasil dihapus!');
-		redirect('example/'.$view_name);
+		 if (!$this->db->affected_rows()) {
+			$result = 'Error! ID ['.$id.'] not found';
+			$this->session->set_flashdata('failed', 'Error! ID ['.$id.'] not found');
+			redirect('example/'.$view_name);
+		} else {
+			$result = 'Success';
+			$this->session->set_flashdata('success', 'Data berhasil dihapus!');
+			redirect('example/'.$view_name);
+		}
+	}
+
+	function remove_data($id, $id_name, $table_name, $view_name){
+		$where = array($id_name => $id);
+		$this->apotek_data->delete_data($where, $table_name);
+		 if (!$this->db->affected_rows()) {
+			$result = 'Error! ID ['.$id.'] not found';
+			$this->session->set_flashdata('failed', 'Error! ID ['.$id.'] not found');
+			redirect('example/'.$view_name);
+		} else {
+			$result = 'Success';
+			$this->session->set_flashdata('success', 'Data berhasil dihapus!');
+			redirect('example/'.$view_name);
+		}
 	}
 
 	function remove_unit($id_unit){
