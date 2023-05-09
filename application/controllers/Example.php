@@ -23,8 +23,9 @@ class Example extends CI_Controller
 	
 
 	function index() {
-		$data['stockjenisobat'] = $this->apotek_data->count_jenis_obat();
-		$data['stockjenisbhp'] = $this->apotek_data->count_jenis_bhp();
+		$data['stokjenisobat'] = $this->apotek_data->count_jenis_obat();
+		$data['stokjenisbhp'] = $this->apotek_data->count_jenis_bhp();
+		$data['stokobat'] = $this->apotek_data->count_obat();
 		$data['stockobat'] = $this->apotek_data->count_med();
 		$data['stockkat'] = $this->apotek_data->count_cat();
 		$data['sup'] = $this->apotek_data->count_sup();
@@ -905,19 +906,43 @@ class Example extends CI_Controller
 
 	function remove_jenis($id, $id_name, $table_name, $view_name){
 		if ($table_name == 'tabel_jenis_obat') {
-			
+			$check = $this->apotek_data->check_foreign_key($id, 'tabel_obat', 'jenis_obat');
+			if ($check == '200') {
+				$where = array($id_name => $id);
+				$this->apotek_data->delete_data($where, $table_name);
+				$this->session->set_flashdata('success', 'Data berhasil dihapus!');
+				redirect('example/'.$view_name);
+			}
+			else if ($check == '500') {
+				$this->session->set_flashdata('failed', 'Error! Data tidak bisa dihapus karena terkait dengan tabel lain!');
+				redirect('example/'.$view_name);
+			}
 		}
-
-		$where = array($id_name => $id);
-		$this->apotek_data->delete_data($where, $table_name);
-		 if (!$this->db->affected_rows()) {
-			$result = 'Error! ID ['.$id.'] not found';
-			$this->session->set_flashdata('failed', 'Error! ID ['.$id.'] not found');
-			redirect('example/'.$view_name);
-		} else {
-			$result = 'Success';
-			$this->session->set_flashdata('success', 'Data berhasil dihapus!');
-			redirect('example/'.$view_name);
+		else if ($table_name == 'tabel_jenis_bhp') {
+			$check = $this->apotek_data->check_foreign_key($id, 'tabel_bhp', 'jenis_bhp');
+			if ($check == '200') {
+				$where = array($id_name => $id);
+				$this->apotek_data->delete_data($where, $table_name);
+				$this->session->set_flashdata('success', 'Data berhasil dihapus!');
+				redirect('example/'.$view_name);
+			}
+			else if ($check == '500') {
+				$this->session->set_flashdata('failed', 'Error! Data tidak bisa dihapus karena terkait dengan tabel lain!');
+				redirect('example/'.$view_name);
+			}
+		}
+		else if ($table_name == 'tabel_obat') {
+			$check = $this->apotek_data->check_foreign_key($id, 'tabel_pembelian', 'id_obat');
+			if ($check == '200') {
+				$where = array($id_name => $id);
+				$this->apotek_data->delete_data($where, $table_name);
+				$this->session->set_flashdata('success', 'Data berhasil dihapus!');
+				redirect('example/'.$view_name);
+			}
+			else if ($check == '500') {
+				$this->session->set_flashdata('failed', 'Error! Data tidak bisa dihapus karena terkait dengan tabel lain!');
+				redirect('example/'.$view_name);
+			}
 		}
 	}
 

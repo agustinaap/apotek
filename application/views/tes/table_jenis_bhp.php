@@ -74,7 +74,7 @@
 function myFunction(data) {
   let text = "Apakah anda yakin ingin menghapus?";
   if (confirm(text) == true) {
-    window.location.href = "<?php echo base_url('example/remove_data/') ?>"+data+'/id/tabel_jenis_bhp/table_jenis_bhp';
+    window.location.href = "<?php echo base_url('example/remove_jenis/') ?>"+data+'/id/tabel_jenis_bhp/table_jenis_bhp';
   } else {
     
   }

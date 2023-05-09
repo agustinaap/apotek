@@ -153,7 +153,7 @@ class Apotek_data extends CI_Model
          INNER JOIN tabel_pembelian p ON p.id_obat = m.id_obat");
     }
 
-      function get_product($nama_obat)
+    function get_product($nama_obat)
     {   $hasil = array();
         $hsl=$this->db->query("SELECT * FROM table_med WHERE nama_obat='$nama_obat'");
         if($hsl->num_rows()>0){
@@ -167,6 +167,18 @@ class Apotek_data extends CI_Model
                     
                     );
             }
+        }
+        return $hasil;
+    }
+
+    function check_foreign_key($id, $tabel_tujuan, $kolom_tujuan)
+    {   $hasil = '200';
+        $hsl=$this->db->query("SELECT * FROM ".$tabel_tujuan." WHERE ".$kolom_tujuan."='$id'");
+        if($hsl->num_rows()>0){
+            $hasil = '500';
+        }
+        else {
+            $hasil = '200';
         }
         return $hasil;
     }
@@ -455,6 +467,12 @@ class Apotek_data extends CI_Model
 
     function count_jenis_bhp(){       
       $cp =  $this->db->query('SELECT * FROM tabel_jenis_bhp'); 
+        $sup = $cp->num_rows();
+        return $sup;    
+    }
+
+    function count_obat(){       
+      $cp =  $this->db->query('SELECT * FROM tabel_obat'); 
         $sup = $cp->num_rows();
         return $sup;    
     }

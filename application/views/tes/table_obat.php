@@ -135,7 +135,7 @@
 function myFunction(data) {
   let text = "Apakah anda yakin ingin menghapus?";
   if (confirm(text) == true) {
-    window.location.href = "<?php echo base_url('example/remove_data/') ?>"+data+'/id_obat/tabel_obat/table_obat';
+    window.location.href = "<?php echo base_url('example/remove_jenis/') ?>"+data+'/id_obat/tabel_obat/table_obat';
   } else {
     
   }

@@ -55,7 +55,7 @@
               <select name="jenis" id="jenis" class="select2_single form-control" tabindex="-1" required="required">
                 <option selected="true" value="" disabled ></option>
                 <?php foreach($table_jenis_obat as $jo){ 
-                  if ($jo->id == $s->jenis) {
+                  if ($jo->id == $s->jenis_obat) {
                     ?><option value="<?php echo $jo->id; ?>" selected><?php echo $jo->nama; ?></option><?php
                   }
                   else {
