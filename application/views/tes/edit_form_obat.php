@@ -2,7 +2,7 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Ubah Jenis Obat</h2>
+        <h2>Ubah Obat</h2>
         <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -13,6 +13,12 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
+      <?php foreach($tabel_obat as $s){ ?>
+      <?php $id_obat = $s->id_obat; ?>
+      <?php $nama_obat = $s->nama_obat; ?>
+      <?php $merk_obat = $s->nama_merk; ?>
+      <?php $jenis = $s->jenis_obat; ?>
+      <?php $bpjs = $s->bpjs; ?>
       <?php if($this->session->flashdata('failed')): ?>
                   <button id="melinda" style="display: none;" class="btn btn-default source" onclick="new PNotify({
                                   title: 'Gagal',
@@ -25,27 +31,47 @@
                  	<?php $this->session->set_flashdata('failed', null); ?>
                  	
 				<?php endif; ?>
+        <?php if($this->session->flashdata('add_id_obat')): ?>
+          <?php $id_obat = $this->session->flashdata('add_id_obat'); ?>
+          <?php $this->session->set_flashdata('add_id_obat', null); ?>
+        <?php endif; ?>
+        <?php if($this->session->flashdata('add_nama_obat')): ?>
+          <?php $nama_obat = $this->session->flashdata('add_nama_obat'); ?>
+          <?php $this->session->set_flashdata('add_nama_obat', null); ?>
+        <?php endif; ?>
+        <?php if($this->session->flashdata('add_merk_obat')): ?>
+          <?php $merk_obat = $this->session->flashdata('add_merk_obat'); ?>
+          <?php $this->session->set_flashdata('add_merk_obat', null); ?>
+        <?php endif; ?>
+        <?php if($this->session->flashdata('add_jenis')): ?>
+          <?php $jenis = $this->session->flashdata('add_jenis'); ?>
+          <?php $this->session->set_flashdata('add_jenis', null); ?>
+        <?php endif; ?>
+        <?php if($this->session->flashdata('add_bpjs')): ?>
+          <?php $bpjs = $this->session->flashdata('add_bpjs'); ?>
+          <?php $this->session->set_flashdata('add_bpjs', null); ?>
+        <?php endif; ?>
 
-        <?php foreach($tabel_obat as $s){ ?>
-        <form action="<?php echo base_url(). 'example/update_jenis_obat'; ?>" method="post" class="form-horizontal form-label-left" novalidate >
+        <form action="<?php echo base_url(). 'example/update_obat'; ?>" method="post" class="form-horizontal form-label-left" novalidate >
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_obat">Id Obat</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input id="id_obat" class="form-control col-md-7 col-xs-12" data-validate-length-range="1" data-validate-words="1" name="id_obat" required="required" type="text" value="<?php echo $s->id_obat ?>">
+              <input type="hidden" name="id_asli" value="<?php echo $s->id_obat ?>">
+              <input id="id_obat" class="form-control col-md-7 col-xs-12" data-validate-length-range="1" data-validate-words="1" name="id_obat" required="required" type="text" value="<?php echo $id_obat ?>">
             </div>
           </div>
 
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_obat">Nama Obat</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input id="nama_obat" name="nama_obat" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $s->nama_obat ?>">
+              <input id="nama_obat" name="nama_obat" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $nama_obat ?>">
             </div>
           </div>
 
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="merk">Merk</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input id="merk" name="merk" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $s->nama_merk ?>">
+              <input id="merk" name="merk" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $merk_obat ?>">
             </div>
           </div>
 
@@ -55,7 +81,7 @@
               <select name="jenis" id="jenis" class="select2_single form-control" tabindex="-1" required="required">
                 <option selected="true" value="" disabled ></option>
                 <?php foreach($table_jenis_obat as $jo){ 
-                  if ($jo->id == $s->jenis_obat) {
+                  if ($jo->id == $jenis) {
                     ?><option value="<?php echo $jo->id; ?>" selected><?php echo $jo->nama; ?></option><?php
                   }
                   else {
@@ -73,11 +99,11 @@
               <select  name="bpjs" id="bpjs" class="select2_single form-control" tabindex="-1" required="required">
               <option selected="true" value="" disabled ></option>
               <?php 
-                if ($s->bpjs == 'YES') {
+                if ($bpjs == 'YES') {
                   ?><option value="YES" selected>YES</option><?php
                   ?><option value="NO">NO</option><?php
                 }
-                else if ($s->bpjs == 'NO') {
+                else if ($bpjs == 'NO') {
                   ?><option value="YES">YES</option><?php
                   ?><option value="NO" selected>NO</option><?php
                 }

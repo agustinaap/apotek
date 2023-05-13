@@ -47,6 +47,12 @@ class Apotek_data extends CI_Model
         INNER JOIN tabel_jenis_obat AS c ON m.jenis_obat = c.id;");
     }
 
+    function bhp()
+    {
+        return $this->db->query("SELECT m.id_bhp, m.nama_bhp, c.nama, m.keterangan FROM tabel_bhp m 
+        INNER JOIN tabel_jenis_bhp AS c ON m.jenis_bhp = c.id;");
+    }
+
     function unit()
     {
         return $this->db->get('table_unit');
@@ -151,6 +157,13 @@ class Apotek_data extends CI_Model
         return $this->db->query("SELECT m.id_obat, m.nama_obat, m.nama_merk, c.nama, p.stok, p.harga_jual,
          p.tgl_kadaluwarsa, m.bpjs FROM tabel_obat m INNER JOIN tabel_jenis_obat AS c ON m.jenis_obat = c.id 
          INNER JOIN tabel_pembelian p ON p.id_obat = m.id_obat");
+    }
+
+    function get_bhp()
+    {
+        return $this->db->query("SELECT m.id_bhp, m.nama_bhp, c.nama, p.stok, p.harga_jual,
+         p.tgl_kadaluwarsa FROM tabel_bhp m INNER JOIN tabel_jenis_bhp AS c ON m.jenis_bhp = c.id 
+         INNER JOIN tabel_pembelian p ON p.id_bhp = m.id_bhp");
     }
 
     function get_product($nama_obat)
@@ -473,6 +486,12 @@ class Apotek_data extends CI_Model
 
     function count_obat(){       
       $cp =  $this->db->query('SELECT * FROM tabel_obat'); 
+        $sup = $cp->num_rows();
+        return $sup;    
+    }
+
+    function count_bhp(){       
+      $cp =  $this->db->query('SELECT * FROM tabel_bhp'); 
         $sup = $cp->num_rows();
         return $sup;    
     }

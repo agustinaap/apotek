@@ -79,7 +79,7 @@
 				<!-- Footer Content -->
 				<footer>
 					<div class="pull-right">
-						<a href="https://http://rsh.fkh.ugm.ac.id/main/">Klinik SWA</a> <?php echo $footer; ?>
+						<a href="">Klinik SWA</a> <?php echo $footer; ?>
 					</div>
 			        <div class="clearfix"></div>
 				</footer>

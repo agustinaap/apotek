@@ -26,6 +26,7 @@ class Example extends CI_Controller
 		$data['stokjenisobat'] = $this->apotek_data->count_jenis_obat();
 		$data['stokjenisbhp'] = $this->apotek_data->count_jenis_bhp();
 		$data['stokobat'] = $this->apotek_data->count_obat();
+		$data['stokbhp'] = $this->apotek_data->count_bhp();
 		$data['stockobat'] = $this->apotek_data->count_med();
 		$data['stockkat'] = $this->apotek_data->count_cat();
 		$data['sup'] = $this->apotek_data->count_sup();
@@ -119,6 +120,16 @@ class Example extends CI_Controller
 		$this->template->write('title', 'Lihat Obat', TRUE);
 		$this->template->write('header', 'Sistem Informasi Apotek');
 		$this->template->write_view('content', 'tes/table_obat', $data, true);
+
+		$this->template->render();
+	}
+
+	function table_bhp() {
+		$data['table_bhp'] = $this->apotek_data->get_bhp()->result();
+		$data['list_bhp'] = $this->apotek_data->bhp()->result();
+		$this->template->write('title', 'Lihat BHP', TRUE);
+		$this->template->write('header', 'Sistem Informasi Apotek');
+		$this->template->write_view('content', 'tes/table_bhp', $data, true);
 
 		$this->template->render();
 	}
@@ -256,6 +267,15 @@ class Example extends CI_Controller
 		$this->template->write('title', 'Tambah Obat', TRUE);
 		$this->template->write('header', 'Sistem Informasi Apotek');
 		$this->template->write_view('content', 'tes/form_obat', $data, true);
+
+		$this->template->render();
+	}
+
+	function form_bhp() {
+		$data['table_jenis_bhp'] = $this->apotek_data->jenis_bhp()->result();
+		$this->template->write('title', 'Tambah BHP', TRUE);
+		$this->template->write('header', 'Sistem Informasi Apotek');
+		$this->template->write_view('content', 'tes/form_bhp', $data, true);
 
 		$this->template->render();
 	}
@@ -524,6 +544,36 @@ class Example extends CI_Controller
 		}
 	}
 
+	function add_bhp(){
+		$id_bhp = $this->input->post('id_bhp');
+		$nama_bhp = $this->input->post('nama_bhp');
+		$jenis = $this->input->post('jenis');
+		$keterangan = $this->input->post('keterangan');
+
+		$data = array(
+			'id_bhp' => $id_bhp,
+			'nama_bhp' => $nama_bhp,
+			'jenis_bhp' => $jenis,
+			'keterangan' => $keterangan
+		);
+			
+		$status_add = $this->apotek_data->check_data_if_available($id_bhp,'tabel_bhp','id_bhp');
+		
+		if ($status_add == 200) {
+			$this->apotek_data->insert_data($data,'tabel_bhp');
+			$this->session->set_flashdata('success', 'BHP berhasil ditambahkan');
+			redirect('example/table_bhp');
+		}
+		else if ($status_add == 500) {
+			$this->session->set_flashdata('failed_save_data', "Bahan yang anda masukkan sudah terdaftar, silakan masukkan inputan yang lain");
+			$this->session->set_flashdata('add_id_bhp', $id_bhp);
+			$this->session->set_flashdata('add_nama_bhp', $nama_bhp);
+			$this->session->set_flashdata('add_jenis', $jenis);
+			$this->session->set_flashdata('add_ket', $keterangan);
+			redirect('example/form_bhp/');
+		}
+	}
+
 	function add_invoice(){
 		 
 			$nama_pembeli = $this->input->post('nama_pembeli');
@@ -755,6 +805,17 @@ class Example extends CI_Controller
 		$this->template->render();
 	}
 
+	function edit_form_bhp($id) {
+		$where = array('id_bhp' => $id);
+		$data['tabel_bhp'] = $this->apotek_data->edit_data($where,'tabel_bhp')->result();
+		$data['table_jenis_bhp'] = $this->apotek_data->jenis_bhp()->result();
+		$this->template->write('title', 'Ubah BHP', TRUE);
+		$this->template->write('header', 'Sistem Informasi Apotek');
+		$this->template->write_view('content', 'tes/edit_form_bhp', $data, true);
+
+		$this->template->render();
+	}
+
 	function edit_form_unit($id_unit) {
 		$where = array('id_unit' => $id_unit);
 		$data['table_unit'] = $this->apotek_data->edit_data($where,'table_unit')->result();
@@ -825,6 +886,91 @@ class Example extends CI_Controller
 		else {
 			$this->session->set_flashdata('password_not_match', "Password lama tidak sesuai, mohon coba lagi");
 			redirect('example/edit_form_user/'.$id_pengguna);
+		}
+	}
+	
+	function update_obat(){
+		$id_asli = $this->input->post('id_asli');
+		$id_obat = $this->input->post('id_obat');
+		$nama = $this->input->post('nama_obat');
+		$merk = $this->input->post('merk');
+		$jenis = $this->input->post('jenis');
+		$bpjs = $this->input->post('bpjs');
+
+		$data = array(
+			'id_obat' => $id_obat,
+			'nama_obat' => $nama,
+			'nama_merk' => $merk,
+			'jenis_obat' => $jenis,
+			'bpjs' => $bpjs
+		);
+
+		$where = array(
+			'id_obat' => $id_asli
+		);
+
+		if ($id_obat == $id_asli) {
+			$this->apotek_data->update_data($where,$data,'tabel_obat');
+			$this->session->set_flashdata('success', 'Data berhasil diperbarui');
+			redirect('example/table_obat');
+		}
+		else {
+			$check = $this->apotek_data->check_foreign_key($id_asli, 'tabel_pembelian', 'id_obat');
+			if ($check == '200') {
+				$this->apotek_data->update_data($where,$data,'tabel_obat');
+				$this->session->set_flashdata('success', 'Data berhasil diperbarui');
+				redirect('example/table_obat');
+			}
+			else if ($check == '500') {
+				$this->session->set_flashdata('failed', 'Error! Data tidak bisa diperbarui karena terkait dengan tabel lain! Mohon jangan ubah Id Obat');
+				$this->session->set_flashdata('add_id_obat', $id_asli);
+				$this->session->set_flashdata('add_nama_obat', $nama);
+				$this->session->set_flashdata('add_merk_obat', $merk);
+				$this->session->set_flashdata('add_jenis', $jenis);
+				$this->session->set_flashdata('add_bpjs', $bpjs);
+				redirect('example/edit_form_obat/'.$id_asli);
+			}
+		}
+	}
+	
+	function update_bhp(){
+		$id_asli = $this->input->post('id_asli');
+		$id_bhp = $this->input->post('id_bhp');
+		$nama = $this->input->post('nama_bhp');
+		$jenis = $this->input->post('jenis');
+		$keterangan = $this->input->post('keterangan');
+
+		$data = array(
+			'id_bhp' => $id_bhp,
+			'nama_bhp' => $nama,
+			'jenis_bhp' => $jenis,
+			'keterangan' => $keterangan
+		);
+
+		$where = array(
+			'id_bhp' => $id_asli
+		);
+
+		if ($id_bhp == $id_asli) {
+			$this->apotek_data->update_data($where,$data,'tabel_bhp');
+			$this->session->set_flashdata('success', 'Data berhasil diperbarui');
+			redirect('example/table_bhp');
+		}
+		else {
+			$check = $this->apotek_data->check_foreign_key($id_asli, 'tabel_pembelian', 'id_bhp');
+			if ($check == '200') {
+				$this->apotek_data->update_data($where,$data,'tabel_bhp');
+				$this->session->set_flashdata('success', 'Data berhasil diperbarui');
+				redirect('example/table_bhp');
+			}
+			else if ($check == '500') {
+				$this->session->set_flashdata('failed', 'Error! Data tidak bisa diperbarui karena terkait dengan tabel lain! Mohon jangan ubah Id Obat');
+				$this->session->set_flashdata('add_id_bhp', $id_asli);
+				$this->session->set_flashdata('add_nama_bhp', $nama);
+				$this->session->set_flashdata('add_jenis', $jenis);
+				$this->session->set_flashdata('add_ket', $keterangan);
+				redirect('example/edit_form_bhp/'.$id_asli);
+			}
 		}
 	}
 	
@@ -933,6 +1079,19 @@ class Example extends CI_Controller
 		}
 		else if ($table_name == 'tabel_obat') {
 			$check = $this->apotek_data->check_foreign_key($id, 'tabel_pembelian', 'id_obat');
+			if ($check == '200') {
+				$where = array($id_name => $id);
+				$this->apotek_data->delete_data($where, $table_name);
+				$this->session->set_flashdata('success', 'Data berhasil dihapus!');
+				redirect('example/'.$view_name);
+			}
+			else if ($check == '500') {
+				$this->session->set_flashdata('failed', 'Error! Data tidak bisa dihapus karena terkait dengan tabel lain!');
+				redirect('example/'.$view_name);
+			}
+		}
+		else if ($table_name == 'tabel_bhp') {
+			$check = $this->apotek_data->check_foreign_key($id, 'tabel_pembelian', 'id_bhp');
 			if ($check == '200') {
 				$where = array($id_name => $id);
 				$this->apotek_data->delete_data($where, $table_name);

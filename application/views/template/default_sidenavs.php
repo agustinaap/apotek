@@ -33,15 +33,15 @@
 							
 						</ul>
 					</li>
-					<!-- <li><a><i class="fa fa-stethoscope"></i> Bahan Habis Pakai <span class="fa fa-chevron-down"></span></a>
+					<li><a><i class="fa fa-stethoscope"></i> Bahan Habis Pakai <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 							<li><a href="<?php echo base_url('example/form_bhp') ?>">Tambah BHP</a></li>
 							<li><a href="<?php echo base_url('example/table_bhp') ?>">Lihat BHP</a></li>
-							<li><a href="<?php echo base_url('example/table_exp') ?>">Obat Kedaluwarsa</a></li>
-							<li><a href="<?php echo base_url('example/table_stock') ?>">Obat Habis</a></li>
+							<!-- <li><a href="<?php echo base_url('example/table_exp') ?>">Obat Kedaluwarsa</a></li>
+							<li><a href="<?php echo base_url('example/table_stock') ?>">Obat Habis</a></li> -->
 							
 						</ul>
-					</li> -->
+					</li>
 					<!-- <li><a><i class="fa fa-hospital-o"></i> Kategori & Unit <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 							<li><a href="<?php echo base_url('example/form_cat') ?>">Tambah Kategori</a></li>
