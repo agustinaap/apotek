@@ -53,6 +53,11 @@ class Apotek_data extends CI_Model
         INNER JOIN tabel_jenis_bhp AS c ON m.jenis_bhp = c.id;");
     }
 
+    function pemasok_obat()
+    {
+        return $this->db->get('tabel_pemasok');
+    }
+
     function unit()
     {
         return $this->db->get('table_unit');

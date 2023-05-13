@@ -24,7 +24,7 @@
 				<ul class="nav side-menu">
 
 					<li><a href="<?php echo base_url('') ?>"><i class="fa fa-home"></i> Beranda </a></li>
-					<li><a><i class="fa fa-medkit"></i> Obat <span class="fa fa-chevron-down"></span></a>
+					<li><a><i class="fa fa-medkit"></i>Obat<span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 							<li><a href="<?php echo base_url('example/form_obat') ?>">Tambah Obat</a></li>
 							<li><a href="<?php echo base_url('example/table_obat') ?>">Lihat Obat</a></li>
@@ -33,7 +33,7 @@
 							
 						</ul>
 					</li>
-					<li><a><i class="fa fa-stethoscope"></i> Bahan Habis Pakai <span class="fa fa-chevron-down"></span></a>
+					<li><a><i class="fa fa-stethoscope"></i>Bahan Habis Pakai<span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 							<li><a href="<?php echo base_url('example/form_bhp') ?>">Tambah BHP</a></li>
 							<li><a href="<?php echo base_url('example/table_bhp') ?>">Lihat BHP</a></li>
@@ -59,19 +59,26 @@
 						</ul>
 					</li> -->
 
-					<li><a><i class="fa fa-users"></i> User <span class="fa fa-chevron-down"></span></a>
-						<ul class="nav child_menu">
-							<li><a href="<?php echo base_url('example/form_user') ?>">Tambah User</a></li>
-                    		<li><a href="<?php echo base_url('example/table_user') ?>">Lihat User</a></li>
-						</ul>
-					</li>
-
-					<li><a><i class="fa fa-list-alt"></i> Jenis Obat / BHP<span class="fa fa-chevron-down"></span></a>
+					<li><a><i class="fa fa-list-alt"></i>Jenis Obat / BHP<span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 							<li><a href="<?php echo base_url('example/form_jenis_obat') ?>">Tambah Jenis Obat</a></li>
                     		<li><a href="<?php echo base_url('example/table_jenis_obat') ?>">Lihat Jenis Obat</a></li>
 							<li><a href="<?php echo base_url('example/form_jenis_bhp') ?>">Tambah Jenis BHP</a></li>
                     		<li><a href="<?php echo base_url('example/table_jenis_bhp') ?>">Lihat Jenis BHP</a></li>
+						</ul>
+					</li>
+
+					<li><a><i class="fa fa-truck"></i>Pemasok Obat<span class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a href="<?php echo base_url('example/form_pemasok_obat') ?>">Tambah Pemasok Obat</a></li>
+							<li><a href="<?php echo base_url('example/table_pemasok_obat') ?>">Lihat Pemasok Obat</a></li>
+						</ul>
+					</li>
+
+					<li><a><i class="fa fa-users"></i>User<span class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a href="<?php echo base_url('example/form_user') ?>">Tambah User</a></li>
+                    		<li><a href="<?php echo base_url('example/table_user') ?>">Lihat User</a></li>
 						</ul>
 					</li>
 

@@ -227,7 +227,15 @@ class Example extends CI_Controller
 		$this->template->render();
 	}
 
-	
+	function table_pemasok_obat() {
+		$data['table_pemasok_obat'] = $this->apotek_data->pemasok_obat()->result();
+		
+		$this->template->write('title', 'Lihat Pemasok Obat', TRUE);
+		$this->template->write('header', 'Sistem Informasi Apotek');
+		$this->template->write_view('content', 'tes/table_pemasok_obat', $data, true);
+
+		$this->template->render();
+	}
 
 	function form_sup() {
 		$this->template->write('title', 'Tambah Pemasok', TRUE);
@@ -276,6 +284,14 @@ class Example extends CI_Controller
 		$this->template->write('title', 'Tambah BHP', TRUE);
 		$this->template->write('header', 'Sistem Informasi Apotek');
 		$this->template->write_view('content', 'tes/form_bhp', $data, true);
+
+		$this->template->render();
+	}
+	
+	function form_pemasok_obat() {
+		$this->template->write('title', 'Tambah Pemasok Obat', TRUE);
+		$this->template->write('header', 'Sistem Informasi Apotek');
+		$this->template->write_view('content', 'tes/form_pemasok_obat', '', true);
 
 		$this->template->render();
 	}
@@ -574,6 +590,33 @@ class Example extends CI_Controller
 		}
 	}
 
+	function add_pemasok_obat(){
+		$nama = $this->input->post('nama');
+		$alamat = $this->input->post('alamat');
+		$telepon = $this->input->post('telepon');
+
+		$data = array(
+			'nama_pemasok' => $nama,
+			'alamat' => $alamat,
+			'no_telepon' => $telepon
+		);
+			
+		$status_add = $this->apotek_data->check_data_if_available($nama,'tabel_pemasok','nama_pemasok');
+		
+		if ($status_add == 200) {
+			$this->apotek_data->insert_data($data,'tabel_pemasok');
+			$this->session->set_flashdata('success', 'Pemasok obat berhasil ditambahkan');
+			redirect('example/table_pemasok_obat');
+		}
+		else if ($status_add == 500) {
+			$this->session->set_flashdata('failed_save_data', "Pemasok obat yang anda masukkan sudah terdaftar, silakan masukkan inputan yang lain");
+			$this->session->set_flashdata('add_nama', $nama);
+			$this->session->set_flashdata('add_alamat', $alamat);
+			$this->session->set_flashdata('add_telepon', $telepon);
+			redirect('example/form_pemasok_obat/');
+		}
+	}
+
 	function add_invoice(){
 		 
 			$nama_pembeli = $this->input->post('nama_pembeli');
@@ -816,6 +859,16 @@ class Example extends CI_Controller
 		$this->template->render();
 	}
 
+	function edit_form_pemasok_obat($id) {
+		$where = array('id_pemasok' => $id);
+		$data['tabel_pemasok'] = $this->apotek_data->edit_data($where,'tabel_pemasok')->result();
+		$this->template->write('title', 'Ubah Pemasok Obat', TRUE);
+		$this->template->write('header', 'Sistem Informasi Apotek');
+		$this->template->write_view('content', 'tes/edit_form_pemasok_obat', $data, true);
+
+		$this->template->render();
+	}
+
 	function edit_form_unit($id_unit) {
 		$where = array('id_unit' => $id_unit);
 		$data['table_unit'] = $this->apotek_data->edit_data($where,'table_unit')->result();
@@ -1011,6 +1064,29 @@ class Example extends CI_Controller
 		$this->session->set_flashdata('success', 'Data berhasil diperbarui');
 		redirect('example/table_jenis_bhp');
 	}
+	
+	function update_pemasok_obat(){
+		$id = $this->input->post('id');
+		$nama = $this->input->post('nama');
+		$alamat = $this->input->post('alamat');
+		$telepon = $this->input->post('telepon');
+
+		$data = array(
+			'id_pemasok' => $id,
+			'nama_pemasok' => $nama,
+			'alamat' => $alamat,
+			'no_telepon' => $telepon,
+		);
+
+		$where = array(
+			'id_pemasok' => $id
+		);
+
+		$this->apotek_data->update_data($where,$data,'tabel_pemasok');
+
+		$this->session->set_flashdata('success', 'Data berhasil diperbarui');
+		redirect('example/table_pemasok_obat');
+	}
 
 	function update_unit(){
 		$id_unit = $this->input->post('id_unit');
@@ -1110,7 +1186,7 @@ class Example extends CI_Controller
 		$this->apotek_data->delete_data($where, $table_name);
 		 if (!$this->db->affected_rows()) {
 			$result = 'Error! ID ['.$id.'] not found';
-			$this->session->set_flashdata('failed', 'Error! ID ['.$id.'] not found');
+			$this->session->set_flashdata('failed', 'Gagal! Data dengan id ['.$id.'] tidak ditemukan.');
 			redirect('example/'.$view_name);
 		} else {
 			$result = 'Success';
