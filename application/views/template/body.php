@@ -195,6 +195,16 @@
         allowInputToggle: true
     });
     
+	$('#myDatepicker22').datetimepicker({
+        format: 'DD-MM-YYYY',
+        allowInputToggle: true
+    });
+
+	$('#myDatepicker23').datetimepicker({
+        format: 'DD-MM-YYYY',
+        allowInputToggle: true
+    });
+
     $('#myDatepicker3').datetimepicker({
         format: 'hh:mm A'
     });

@@ -228,6 +228,17 @@ class Apotek_data extends CI_Model
         return $status;
     }
 
+    function check_duplicate_obat($table,$column_nama,$column_merk,$column_jenis,$data_nama,$data_merk,$data_jenis,){
+        $hasil=$this->db->query("SELECT * FROM ".$table." WHERE ".$column_nama."='$data_nama'"." AND ".$column_merk."='$data_merk'"." AND ".$column_jenis."='$data_jenis'");
+        $status = 0;
+        if($hasil->num_rows()>0){
+            $status = 500;
+         }else{
+            $status = 200;
+         }
+        return $status;
+    }
+
     function edit_data($where,$table){      
         return $this->db->get_where($table,$where);
     }

@@ -308,11 +308,10 @@ class Example extends CI_Controller
 	}
 	function form_pembelian_obat() {
 		$data['table_obat'] = $this->apotek_data->obat()->result();
-		$data['table_bhp'] = $this->apotek_data->bhp()->result();
 		$data['table_pemasok_obat'] = $this->apotek_data->pemasok_obat()->result();
 		$this->template->write('title', 'Tambah Pembelian Obat', TRUE);
 		$this->template->write('header', 'Sistem Informasi Apotek');
-		$this->template->write_view('content', 'tes/form_pembelian_obat', '', true);
+		$this->template->write_view('content', 'tes/form_pembelian_obat', $data, true);
 
 		$this->template->render();
 	}
@@ -564,13 +563,25 @@ class Example extends CI_Controller
 		);
 			
 		$status_add = $this->apotek_data->check_data_if_available($id_obat,'tabel_obat','id_obat');
+		$status_duplicate = $this->apotek_data->check_duplicate_obat('tabel_obat','nama_obat','nama_merk','jenis_obat',$nama_obat,$merk,$jenis);
 		
 		if ($status_add == 200) {
-			$this->apotek_data->insert_data($data,'tabel_obat');
-			$this->session->set_flashdata('success', 'Obat berhasil ditambahkan');
-			redirect('example/table_obat');
+			if ($status_duplicate == 200) {
+				$this->apotek_data->insert_data($data,'tabel_obat');
+				$this->session->set_flashdata('success', 'Obat berhasil ditambahkan');
+				redirect('example/table_obat');
+			}
+			else if ($status_duplicate == 500) {
+				$this->session->set_flashdata('failed_save_data', "Obat yang anda masukkan sudah terdaftar, silakan masukkan inputan yang lain");
+				$this->session->set_flashdata('add_id_obat', $id_obat);
+				$this->session->set_flashdata('add_nama_obat', $nama_obat);
+				$this->session->set_flashdata('add_merk_obat', $merk);
+				$this->session->set_flashdata('add_jenis', $jenis);
+				$this->session->set_flashdata('add_bpjs', $bpjs);
+				redirect('example/form_obat/');
+			}
 		}
-		else if ($status_add == 500) {
+		else if ($status_duplicate == 500) {
 			$this->session->set_flashdata('failed_save_data', "Obat yang anda masukkan sudah terdaftar, silakan masukkan inputan yang lain");
 			$this->session->set_flashdata('add_id_obat', $id_obat);
 			$this->session->set_flashdata('add_nama_obat', $nama_obat);

@@ -60,34 +60,38 @@
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_obat">Nama Obat</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input id="nama_obat" name="nama_obat" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $nama_obat ?>">
-            </div>
-          </div>
-
-          <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="merk">Merk</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input id="merk" name="merk" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $merk_obat ?>">
-            </div>
-          </div>
-
-          <!-- <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis">Jenis</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <select name="jenis" id="jenis" class="select2_single form-control" tabindex="-1" required="required">
+              <select name="nama_obat" id="nama_obat" class="select2_single form-control" tabindex="-1" required="required">
                 <option selected="true" value="" disabled ></option>
-                <?php foreach($table_jenis_obat as $jo){ 
-                  if ($jo->id == $jenis) {
-                    ?><option value="<?php echo $jo->id; ?>" selected><?php echo $jo->nama; ?></option><?php
+                <?php foreach($table_obat as $jo){ 
+                  if ($jo->id_obat == $nama_obat) {
+                    ?><option value="<?php echo $jo->id_obat; ?>" selected><?php echo $jo->nama_obat; ?></option><?php
                   }
                   else {
-                    ?><option value="<?php echo $jo->id; ?>"><?php echo $jo->nama; ?></option><?php
+                    ?><option value="<?php echo $jo->id_obat; ?>"><?php echo $jo->nama_obat; ?></option><?php
                   }
                   ?>
                <?php  }?>
               </select>
             </div>
-          </div> -->
+          </div>
+
+          <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="merk">Merk Obat</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <select name="merk" id="merk" class="select2_single form-control" tabindex="-1" required="required">
+                <option selected="true" value="" disabled ></option>
+                <?php foreach($table_obat as $jo){ 
+                  if ($jo->id_obat == $merk_obat) {
+                    ?><option value="<?php echo $jo->id_obat; ?>" selected><?php echo $jo->nama_merk; ?></option><?php
+                  }
+                  else {
+                    ?><option value="<?php echo $jo->id_obat; ?>"><?php echo $jo->nama_merk; ?></option><?php
+                  }
+                  ?>
+               <?php  }?>
+              </select>
+            </div>
+          </div>  
 
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="banyak">Jumlah</label>
@@ -131,16 +135,28 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
               <select name="pemasok" id="pemasok" class="select2_single form-control" tabindex="-1" required="required">
                 <option selected="true" value="" disabled ></option>
-                <?php foreach($table_jenis_obat as $jo){ 
-                  if ($jo->id == $jenis) {
-                    ?><option value="<?php echo $jo->id; ?>" selected><?php echo $jo->nama; ?></option><?php
+                <?php foreach($table_pemasok_obat as $jo){ 
+                  if ($jo->id_pemasok == $pemasok) {
+                    ?><option value="<?php echo $jo->id_pemasok; ?>" selected><?php echo $jo->nama_pemasok; ?></option><?php
                   }
                   else {
-                    ?><option value="<?php echo $jo->id; ?>"><?php echo $jo->nama; ?></option><?php
+                    ?><option value="<?php echo $jo->id_pemasok; ?>"><?php echo $jo->nama_pemasok; ?></option><?php
                   }
                   ?>
                <?php  }?>
               </select>
+            </div>
+          </div>
+
+          <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tgl_pembelian">Tanggal Pembelian</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class='input-group date' id='myDatepicker22'>
+                  <input type="text" name="tgl_pembelian" id="tgl_pembelian" class="form-control" required="required">
+                  <span class="input-group-addon">
+                     <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
             </div>
           </div>
 
@@ -156,17 +172,7 @@
             </div>
           </div>
 
-          <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tgl_pembelian">Tanggal Pembelian</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <div class='input-group date' id='myDatepicker2'>
-                  <input type="text" name="tgl_pembelian" id="tgl_pembelian" class="form-control" required="required">
-                  <span class="input-group-addon">
-                     <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-            </div>
-          </div>
+          
 
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="harga_beli_unit">Harga Beli per Unit</label>
@@ -222,7 +228,7 @@
           <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jatuh_tempo">Jatuh Tempo</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <div class='input-group date' id='myDatepicker2'>
+              <div class='input-group date' id='myDatepicker23'>
                   <input type="text" name="jatuh_tempo" id="jatuh_tempo" class="form-control" required="required">
                   <span class="input-group-addon">
                      <span class="glyphicon glyphicon-calendar"></span>
