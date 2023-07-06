@@ -40,6 +40,10 @@
               <span class="count_top"><i class="fa fa-stethoscope"></i> Total BHP</span>
               <div class="count"><?php echo $stokbhp ?></div>
             </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-truck"></i> Total Pemasok</span>
+              <div class="count"><?php echo $stokpemasok ?></div>
+            </div>
             <!-- <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-hospital-o"></i> Total Kategori</span>
               <div class="count"><?php echo $stockkat ?></div>
@@ -111,6 +115,18 @@
                     <div class="count">...</div>
                     <h3>Bahan Habis Pakai</h3>
                     <p>Menambahkan bhp baru</p>
+                  </div>
+                  </a>
+                </div>
+
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                  <a href="<?php echo base_url('example/form_pemasok_obat') ?>">
+                  <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-truck green"></i>
+                    </div>
+                    <div class="count">...</div>
+                    <h3>Pemasok</h3>
+                    <p>Menambahkan pemasok baru</p>
                   </div>
                   </a>
                 </div>

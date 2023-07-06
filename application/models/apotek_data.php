@@ -58,6 +58,12 @@ class Apotek_data extends CI_Model
         return $this->db->get('tabel_pemasok');
     }
 
+    function hutang()
+    {
+        return $this->db->query("SELECT m.id_obat, m.nama_obat, m.nama_merk, c.nama, m.bpjs FROM tabel_obat m 
+        INNER JOIN tabel_jenis_obat AS c ON m.jenis_obat = c.id;");
+    }
+
     function unit()
     {
         return $this->db->get('table_unit');
@@ -497,6 +503,12 @@ class Apotek_data extends CI_Model
 
     function count_bhp(){       
       $cp =  $this->db->query('SELECT * FROM tabel_bhp'); 
+        $sup = $cp->num_rows();
+        return $sup;    
+    }
+
+    function count_pemasok(){       
+      $cp =  $this->db->query('SELECT * FROM tabel_pemasok'); 
         $sup = $cp->num_rows();
         return $sup;    
     }

@@ -75,6 +75,13 @@
 						</ul>
 					</li>
 
+					<li><a><i class="fa fa-money"></i>Hutang<span class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a href="<?php echo base_url('example/form_hutang') ?>">Tambah Hutang</a></li>
+							<li><a href="<?php echo base_url('example/table_hutang') ?>">Lihat Hutang</a></li>
+						</ul>
+					</li>
+
 					<li><a><i class="fa fa-users"></i>User<span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
 							<li><a href="<?php echo base_url('example/form_user') ?>">Tambah User</a></li>
@@ -89,21 +96,20 @@
                     	<li><a href="<?php echo base_url('example/table_invoice') ?>">Lihat Penjualan</a></li>
                     	<li><a href="<?php echo base_url('example/invoice_report') ?>">Grafik Penjualan</a></li>
                     </ul>
-                  </li>
+                  </li>-->
 
 
                   <li><a><i class="fa fa-shopping-cart"></i> Pembelian <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu">
-							<li><a href="<?php echo base_url('example/form_purchase') ?>">Tambah Pembelian</a></li>
-							<li><a href="<?php echo base_url('example/table_purchase') ?>">Lihat Pembelian</a></li>
-							<li><a href="<?php echo base_url('example/purchase_report') ?>">Grafik Pembelian</a></li>
-							
-							
+							<li><a href="<?php echo base_url('example/form_pembelian_obat') ?>">Tambah Pembelian Obat</a></li>
+							<li><a href="<?php echo base_url('example/table_purchase') ?>">Lihat Pembelian Obat</a></li>
+							<li><a href="<?php echo base_url('example/form_pembelian_obat') ?>">Tambah Pembelian BHP</a></li>
+							<li><a href="<?php echo base_url('example/table_purchase') ?>">Lihat Pembelian BHP</a></li>
 						</ul>
 					</li>
 
 
-					<li><a href="<?php echo base_url('example/report') ?>"><i class="fa fa-bar-chart"></i> Laporan </a></li> -->
+					<!-- <li><a href="<?php echo base_url('example/report') ?>"><i class="fa fa-bar-chart"></i> Laporan </a></li> -->
 
 				</ul>
 			</div>

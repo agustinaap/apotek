@@ -27,6 +27,7 @@ class Example extends CI_Controller
 		$data['stokjenisbhp'] = $this->apotek_data->count_jenis_bhp();
 		$data['stokobat'] = $this->apotek_data->count_obat();
 		$data['stokbhp'] = $this->apotek_data->count_bhp();
+		$data['stokpemasok'] = $this->apotek_data->count_pemasok();
 		$data['stockobat'] = $this->apotek_data->count_med();
 		$data['stockkat'] = $this->apotek_data->count_cat();
 		$data['sup'] = $this->apotek_data->count_sup();
@@ -237,6 +238,16 @@ class Example extends CI_Controller
 		$this->template->render();
 	}
 
+	function table_hutang() {
+		$data['table_hutang'] = $this->apotek_data->hutang()->result();
+		
+		$this->template->write('title', 'Lihat Hutang', TRUE);
+		$this->template->write('header', 'Sistem Informasi Apotek');
+		$this->template->write_view('content', 'tes/table_hutang', $data, true);
+
+		$this->template->render();
+	}
+
 	function form_sup() {
 		$this->template->write('title', 'Tambah Pemasok', TRUE);
 		$this->template->write('header', 'Sistem Informasi Apotek');
@@ -292,6 +303,16 @@ class Example extends CI_Controller
 		$this->template->write('title', 'Tambah Pemasok Obat', TRUE);
 		$this->template->write('header', 'Sistem Informasi Apotek');
 		$this->template->write_view('content', 'tes/form_pemasok_obat', '', true);
+
+		$this->template->render();
+	}
+	function form_pembelian_obat() {
+		$data['table_obat'] = $this->apotek_data->obat()->result();
+		$data['table_bhp'] = $this->apotek_data->bhp()->result();
+		$data['table_pemasok_obat'] = $this->apotek_data->pemasok_obat()->result();
+		$this->template->write('title', 'Tambah Pembelian Obat', TRUE);
+		$this->template->write('header', 'Sistem Informasi Apotek');
+		$this->template->write_view('content', 'tes/form_pembelian_obat', '', true);
 
 		$this->template->render();
 	}
@@ -591,6 +612,32 @@ class Example extends CI_Controller
 	}
 
 	function add_pemasok_obat(){
+		$nama = $this->input->post('nama');
+		$alamat = $this->input->post('alamat');
+		$telepon = $this->input->post('telepon');
+
+		$data = array(
+			'nama_pemasok' => $nama,
+			'alamat' => $alamat,
+			'no_telepon' => $telepon
+		);
+			
+		$status_add = $this->apotek_data->check_data_if_available($nama,'tabel_pemasok','nama_pemasok');
+		
+		if ($status_add == 200) {
+			$this->apotek_data->insert_data($data,'tabel_pemasok');
+			$this->session->set_flashdata('success', 'Pemasok obat berhasil ditambahkan');
+			redirect('example/table_pemasok_obat');
+		}
+		else if ($status_add == 500) {
+			$this->session->set_flashdata('failed_save_data', "Pemasok obat yang anda masukkan sudah terdaftar, silakan masukkan inputan yang lain");
+			$this->session->set_flashdata('add_nama', $nama);
+			$this->session->set_flashdata('add_alamat', $alamat);
+			$this->session->set_flashdata('add_telepon', $telepon);
+			redirect('example/form_pemasok_obat/');
+		}
+	}
+	function add_pembelian_obat(){
 		$nama = $this->input->post('nama');
 		$alamat = $this->input->post('alamat');
 		$telepon = $this->input->post('telepon');
